@@ -2,9 +2,11 @@ class Contador {
   constructor(nombre) {
     this.nombre = nombre;
     this.valor = 0;
+    Contador.contadorGlobal++;
   }
 
   static contadorGlobal = 0;
+  static nacionalidad = "Argentina";
 
   incrementar() {
     this.valor++;

@@ -8,4 +8,9 @@ if (true === true) {
 }
 console.log("Quiero llamar a despedida desde afuera", despedida);
 
-///
+function uno() {
+  let saludo;
+}
+function dos() {
+  let saludo;
+}
