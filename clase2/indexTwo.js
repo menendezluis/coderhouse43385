@@ -114,5 +114,57 @@ objetos.forEach((dato) => {
   total = total + temporalTotal;
 });
 
-console.log("Productos para vendidos:", productos);
-console.log("Total a pagar:", total);
+//console.log("Productos para vendidos:", productos);
+//console.log("Total a pagar:", total);
+
+let cadenaDeTexto =
+  "        Hola clase, estamos aprendiendo sobre emascript y los diferentes cambios      ";
+//console.log(cadenaDeTexto.trim());
+
+let arregloconFlat = [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  6,
+  7,
+  88,
+  9,
+  0,
+  55,
+  44,
+  33,
+  22,
+  11,
+  00,
+  [999, 888, 777, 66],
+];
+
+//console.log(arregloconFlat.flat().flat());
+
+let variablePrueba = null;
+let variableAsignable = variablePrueba || "Sin valor";
+
+//console.log(variableAsignable);
+let variableNullish = variablePrueba ?? "sin valor";
+//console.log(variableNullish);
+
+class Persona {
+  #fullname;
+  constructor(nombre, apellido) {
+    this.nombre = nombre;
+    this.apellido = apellido;
+    this.#fullname = `${this.nombre} ${this.apellido}`;
+  }
+  getFullName = () => {
+    return this.#fullname;
+  };
+}
+
+let instancia1 = new Persona("Tomas", "Aberastain");
+console.log(instancia1.nombre);
+console.log(instancia1.#fullname);
+
+console.log(instancia1.getFullName());
