@@ -1,4 +1,3 @@
-//write a code that write and read a file using promises
 const fs = require("fs");
 
 const date = new Date();
@@ -26,4 +25,16 @@ async function promesa() {
     console.log(err);
   }
 }
+const promesaFlecha = async () => {
+  try {
+    await fs.promises.writeFile(
+      "date.txt",
+      date.toISOString() + "Usando asyn/await"
+    );
+    let result = await fs.promises.readFile("date.txt", "utf-8");
+    console.log(result);
+  } catch (err) {
+    console.log(err);
+  }
+};
 promesa();
