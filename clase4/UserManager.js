@@ -1,58 +1,134 @@
-const fs = require("fs");
+const fs = require("fs").promises;
+const crypto = require("crypto");
 
 class UserManager {
-  usuarios = [];
-  constructor(path) {
-    this.path = path;
-    this.cargarElArchivo();
+  constructor() {
+    this.users = [];
   }
 
-  agregarUsuario(usuario) {
-    this.guardarEnArchivo(usuario);
-  }
+  createUser(name, lastName, username, password) {
+    const user = {
+      id: this.users.length + 1,
+      name,
+      lastName,
+      username,
+      password: crypto.createHash("sha256").update(password).digest("hex"),
+    };
 
-  async guardarEnArchivo(usuario) {
-    try {
-      let datosPrevios = await fs.promises.readFile(this.path, "utf-8");
-      let datos = await JSON.parse(datosPrevios);
-      if (datos.length === 0) {
-        this.usuarios.push(usuario);
+    if (
+      name === undefined ||
+      lastName === undefined ||
+      username === undefined ||
+      password === undefined
+    ) {
+      return console.log("Todos los campos son obligatorios");
+    }
 
-        await fs.promises.writeFile(this.path, JSON.stringify(this.usuarios));
-      } else {
-        this.usuarios = datos;
-        this.usuarios.push(usuario);
-        await fs.promises.unlink(this.path);
-        await fs.promises.writeFile(this.path, JSON.stringify(this.usuarios));
-      }
-    } catch (err) {
-      throw new Error(err);
+    let condition = this.users.find((user) => user.username === username);
+    if (condition) {
+      return console.log("El usuario ya existe");
+    } else {
+      this.users.push(user);
     }
   }
 
-  async cargarElArchivo() {
+  getUsers() {
+    return this.users;
+  }
+
+  async getUserById(id) {
+    let myID = parseInt(id);
+    let myUser = null;
+    this.users.forEach((user) => {
+      if (user.id === myID) {
+        myUser = user;
+      }
+    });
+    if (myUser === null) {
+      return console.log("No existe el usuario");
+    } else {
+      return myUser;
+    }
+  }
+
+  async getUserByUsername(username) {
+    let myUsername = username;
+    let myUser = null;
+    this.users.forEach((user) => {
+      if (user.username === myUsername) {
+        myUser = user;
+      }
+    });
+    if (myUser === null) {
+      return console.log("No existe el usuario");
+    } else {
+      return myUser;
+    }
+  }
+
+  async deleteUser(username, password) {
+    let myUsername = username;
+    let myPassword = crypto.createHash("sha256").update(password).digest("hex");
+    let myUser = null;
+    this.users.forEach((user) => {
+      if (user.username === myUsername && user.password === myPassword) {
+        myUser = user;
+        console.log("El usuario se encontró, se eliminará");
+      }
+    });
+    if (myUser === null) {
+      return console.log("No existe el usuario");
+    } else {
+      let index = this.users.indexOf(myUser);
+      this.users.splice(index, 1);
+    }
+  }
+
+  async updateUser(
+    username,
+    password,
+    newName,
+    newLastName,
+    newUsername,
+    newPassword
+  ) {
+    let myUsername = username;
+    let myPassword = crypto.createHash("sha256").update(password).digest("hex");
+    let myUser = null;
+    this.users.forEach((user) => {
+      if (user.username === myUsername && user.password === myPassword) {
+        myUser = user;
+      }
+    });
+    if (myUser === null) {
+      return console.log("No existe el usuario");
+    } else {
+      myUser.name = newName;
+      myUser.lastName = newLastName;
+      myUser.username = newUsername;
+      myUser.password = crypto
+        .createHash("sha256")
+        .update(newPassword)
+        .digest("hex");
+    }
+  }
+
+  async saveUsers() {
     try {
-      let result = await fs.promises.readFile(this.path, "utf-8");
-      let data = await JSON.parse(result);
-      this.usuarios = data;
-      console.log(this.usuarios);
+      await fs.writeFile("users.json", JSON.stringify(this.users));
     } catch (err) {
-      throw new Error(err);
+      console.log("Error al guardar el archivo");
+    }
+  }
+
+  async loadUsers() {
+    try {
+      const data = await fs.readFile("users.json");
+      this.users = JSON.parse(data);
+    } catch (err) {
+      console.log("Error al leer el archivo");
     }
   }
 }
 
-let userManager = new UserManager("./usuarios.json");
-userManager.agregarUsuario({
-  nombre: "Yanina ",
-  apellido: "Glaser",
-});
-userManager.agregarUsuario({
-  nombre: "Daniel",
-  apellido: "Perco",
-});
-userManager.agregarUsuario({
-  nombre: "Jhoceliz",
-  apellido: "Figueroa Pinto",
-});
-userManager.cargarElArchivo();
+module.exports = UserManager;
