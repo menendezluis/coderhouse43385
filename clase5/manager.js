@@ -1,6 +1,9 @@
 const UserManager = require("./UserManager.js");
 
+let newVariable = new String("hola");
+
 const userManager = new UserManager([]);
+
 
 //creamos un nuevo usuario
 userManager.createUser("Juan", "Perez", "jperez", "123456");

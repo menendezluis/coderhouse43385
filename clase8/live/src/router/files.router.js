@@ -15,15 +15,6 @@ router.post("/", uploader, (req, res) => {
   files.push(req.body);
   res.json({ message: "usuario agregado", data: req.body });
 });
-router.post(
-  "/upload",
-  multer({ dest: "uploads/" }).single("file"),
-  (req, res) => {
-    console.log(req.file);
 
-    files.push(req.body);
-    res.json({ message: "usuario agregado", data: req.body });
-  }
-);
 
 export default router;

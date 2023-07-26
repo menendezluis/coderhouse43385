@@ -11,7 +11,6 @@ app.set("view engine", "handlebars");
 app.set("views", "./views");
 
 app.use(express.static("public"));
-
 app.use("/views", viewsRoute);
 
 app.get("/formulario", (req, res) => {

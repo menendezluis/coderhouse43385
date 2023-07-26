@@ -45,6 +45,7 @@ socketServer.on("connection", (socket) => {
       user: socket.user,
       id: socket.id,
     });
+    
   });
   socket.on("message", (data) => {
     messages.push(data);

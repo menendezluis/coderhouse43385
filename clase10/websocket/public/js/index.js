@@ -45,8 +45,9 @@ socket.on("messageLogs", (data) => {
       <div class="chat-message">
       <div class="message-bubble">
 
-        <div class="message-sender">${elem.user}</div>
+        <div class="message-sender" >${elem.user}</div>
         <p>${elem.message}</p>
+        <button id="deleteData">Eliminar</button>
         </div>
 
       </div>
