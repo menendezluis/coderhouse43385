@@ -37,3 +37,39 @@ let alumnos = [
     curso: "Backend",
   },
 ];
+let alumnosTwo = [
+  {
+    nombre: "Walter",
+    apellido: "Maza",
+    curso: "Python",
+    edad: 28,
+    correo: "walter@gmail.com",
+    genero: "Masculino",
+  },
+  {
+    nombre: "Alber",
+    apellido: "Lopez",
+    curso: "Cocina",
+    edad: 35,
+    correo: "alberto@gmail.com",
+  },
+  {
+    nombre: "Sarai",
+    apellido: "Perez",
+    curso: "Backend",
+    edad: 33,
+    correo: "sara@gmail.com",
+    genero: "Femenino",
+  },
+  {
+    nombre: "Maria",
+    apellido: "Soriano",
+    correo: "maria@gmail.com",
+  },
+  {
+    nombre: "Tomas",
+    apellido: "Alvarez",
+    curso: "Backend",
+    edad: 25,
+  },
+];

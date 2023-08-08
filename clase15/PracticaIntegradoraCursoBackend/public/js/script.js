@@ -1,5 +1,4 @@
 const postMyData = async (data) => {
-  console.log("aqui vamos", data);
   try {
     const response = await fetch("http://localhost:8080/api/pets/", {
       method: "POST",

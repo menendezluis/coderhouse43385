@@ -34,8 +34,7 @@ document.getElementById("productForm").addEventListener("submit", (event) => {
 });
 
 // Obtener la lista de productos inicial desde el servidor
-socket.on("initialProductList", (productList) => {
-  updateProductList(productList);
+socket.on("initialProductList", (productList) => {  updateProductList(productList);
 });
 
 // Agregar un nuevo producto a la lista
@@ -61,11 +60,13 @@ function updateProductList(products) {
 
 // ...
 
+function deleteProduct(productID) {
+  socket.emit("eliminarProducto", productID);
+}
 // Actualizar la lista de productos
 function updateProductList(products) {
   const productList = document.getElementById("productList");
   productList.innerHTML = "";
-
   products.forEach((product) => {
     const li = document.createElement("li");
     li.innerHTML = `
@@ -74,8 +75,12 @@ function updateProductList(products) {
       <p>Descripción: ${product.description}</p>
       <p>Precio: ${product.price}</p>
       <p>Thumbnail: ${product.thumbnail}</p>
-      <button class="btnEliminar" data-id="${product.id}">Eliminar</button>
+      <button class="btnEliminar" id={${product.id}} data-id="${product.id}" 
+       onclick={`deleteProduct(product.id)`}
+       >Eliminar</button>
     `;
+
+
 
     // Agregar el evento de clic al botón de eliminación
     const btnEliminar = li.querySelector(".btnEliminar");

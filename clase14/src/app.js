@@ -10,7 +10,6 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 8080;
 const MONGO_URI = process.env.MONGO_URI;
-console.log("MONGO_URI", MONGO_URI);
 
 // Conexión a la base de datos
 let dbConnect = mongoose.connect(MONGO_URI, {
