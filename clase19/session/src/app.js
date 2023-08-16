@@ -3,22 +3,28 @@ import cookierParser from "cookie-parser";
 import handlebars from "express-handlebars";
 import session from "express-session";
 import FileStore from "session-file-store";
-
+import MongoStore from "connect-mongo";
 import __dirname from "./utils.js";
+import * as dotenv from "dotenv";
 
+dotenv.config();
 const app = express();
-const fileStorage = FileStore(session);
+//const fileStorage = FileStore(session);
 //*****cookiess */
 app.use(cookierParser("C0d3rS3cr3t"));
 app.use(express.json());
 
+const MONGO_URL = process.env.MONGO_URL;
+
 //*****session */
+//******** session con filestorage */
+/*
 app.use(
+
   session({
     store: new fileStorage({
-      //path: __dirname + "/sessions",
       path: "./sessions",
-      ttl: 3600,
+      ttl: 100,
       retries: 0,
     }),
     secret: "codersecret",
@@ -26,6 +32,26 @@ app.use(
     saveUninitialized: true,
   })
 );
+*/
+//******** session con filestorage */
+
+//******** session con mongodb */
+app.use(
+  session({
+    store: MongoStore.create({
+      mongoUrl: MONGO_URL,
+      mongoOptions: {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      },
+      ttl: 30,
+    }),
+    secret: "codersecret",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+//******** session con mongodb */
 
 app.use(express.static("public"));
 
