@@ -1,0 +1,8 @@
+MONGO_URL="mongodb://localhost:27017"
+PORT="####"
+DB_USER="userdb"
+DB_PASS="ssssss"
+DB_NAME="users"
+GITHUB_CLIENT_ID="Iv1.bbbbbbb"
+GITHUB_CLIENT_SECRET="aaaaaaa"
+GITHUB_CALLBACK_URL="http://localhost:3838/api/sessions/githubcallback"
