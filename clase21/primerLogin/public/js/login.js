@@ -5,8 +5,7 @@
   document.getElementById("send").addEventListener("click", function () {
     const email = document.getElementById("username").value;
     const password = document.getElementById("password").value;
-
-    */
+*/
 async function postLogin(username, password) {
   console.log(username, password);
   const response = await fetch("/api/session/login", {
