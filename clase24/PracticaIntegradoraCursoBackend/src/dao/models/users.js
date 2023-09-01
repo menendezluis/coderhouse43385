@@ -25,6 +25,7 @@ const usersSchema = new mongoose.Schema({
   gender: {
     type: String,
     enum: ["M", "F"],
+    default: "M",
   },
   role: {
     type: String,
@@ -35,7 +36,7 @@ const usersSchema = new mongoose.Schema({
     type: [
       {
         type: mongoose.SchemaTypes.ObjectId,
-        ref: "courses",
+        ref: "courses", //collecion
       },
     ],
     default: [],

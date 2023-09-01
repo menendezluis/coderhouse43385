@@ -26,5 +26,9 @@ const coursesSchema = mongoose.Schema({
   },
 });
 
+/*coursesSchema.pre("find", function () {
+  this.populate("Users.courses");
+});*/
+
 const coursesModel = mongoose.model(courseCollection, coursesSchema);
 export default coursesModel;
