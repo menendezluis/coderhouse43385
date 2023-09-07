@@ -17,6 +17,8 @@ const cookieExtractor = (req) => {
   }
   return token;
 };
+
+//en la db
 const initializePassport = async () => {
   passport.use(
     "jwt",
