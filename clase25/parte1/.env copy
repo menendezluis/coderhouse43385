@@ -1,0 +1,3 @@
+MONGO_DB="mongodb://ejemploservidor.com:27017/"
+USER="ejemploUser"
+PASSWORD="ejemploPass"
