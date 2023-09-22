@@ -16,7 +16,7 @@ export default class UsersRouter extends Router {
       res.sendSuccess("Hola coders");
     });
 
-    this.get("/premiumcoders", ["USER_PREMIUM"], async (req, res) => {
+    this.get("/premiumcoders", ["USER", "USER_PREMIUM"], async (req, res) => {
       res.sendSuccess("Hola PREMIUM coders");
     });
     this.post("/login", ["PUBLIC"], async (req, res) => {

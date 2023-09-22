@@ -50,8 +50,8 @@ app.post("/login", (req, res) => {
   }
 });
 
-app.get("/current", passportCall("jwt"), authorization("user"), (req, res) => {
-  console.log("calling current");
+app.get("/current", passportCall("jwt"), authorization("admin"), (req, res) => {
+  //console.log("calling current");
   res.send(req.user);
 });
 
