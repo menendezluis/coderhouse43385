@@ -8,8 +8,8 @@ const contacts = new Contacts();
 const contactRepository = new ContactRepository(contacts);
 
 router.get("/", async (req, res) => {
-  let result = await contacts.get();
-
+  //let result = await contacts.get();
+    const data = await contactRepository.getContacts();
   res.send({ status: "ok", payload: result });
 });
 
