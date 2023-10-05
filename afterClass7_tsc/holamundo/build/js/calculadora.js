@@ -1,0 +1,17 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.multiplicacionPorPI = exports.raiz = exports.potencia = exports.division = exports.multiplicacion = exports.resta = exports.suma = void 0;
+const suma = (a, b) => a + b;
+exports.suma = suma;
+const resta = (a, b) => a - b;
+exports.resta = resta;
+const multiplicacion = (a, b) => a * b;
+exports.multiplicacion = multiplicacion;
+const division = (a, b) => a / b;
+exports.division = division;
+const potencia = (a, b) => a ** b;
+exports.potencia = potencia;
+const raiz = (a) => Math.sqrt(a);
+exports.raiz = raiz;
+const multiplicacionPorPI = (a) => a * Math.PI;
+exports.multiplicacionPorPI = multiplicacionPorPI;
