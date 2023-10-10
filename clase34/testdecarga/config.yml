@@ -1,0 +1,15 @@
+config:
+  plugins:
+    metrics-by-endpoint: {}
+  target: "http://localhost:8080"
+  phases:
+    - duration: 20
+      arrivalRate: 10
+scenarios:
+  - name: "Generar logins"
+    flow:
+      - post:
+          url: "/api/session/login"
+          json: #representara el body
+            username: "jose"
+            password: "josepass"
