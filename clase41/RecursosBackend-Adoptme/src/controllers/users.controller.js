@@ -13,6 +13,21 @@ const getUser = async (req, res) => {
   res.send({ status: "success", payload: user });
 };
 
+const createUser = async (req, res) => {
+  const { first_name, last_name, email, password } = req.body;
+  if (!first_name || !last_name || !email || !password)
+    return res
+      .status(400)
+      .send({ status: "error", error: "Incomplete values" });
+  const user = await usersService.getBy({ email });
+  if (user)
+    return res
+      .status(400)
+      .send({ status: "error", error: "User already exists" });
+  const result = await usersService.create(req.body);
+  res.send({ status: "success", payload: result });
+};
+
 const updateUser = async (req, res) => {
   const updateBody = req.body;
   const userId = req.params.uid;
@@ -28,16 +43,11 @@ const deleteUser = async (req, res) => {
   const result = await usersService.getUserById(userId);
   res.send({ status: "success", message: "User deleted" });
 };
-const createUser = async (req, res) => {
-  const newUser = req.body;
-  const result = await usersService.create(newUser);
-  res.send({ status: "success", message: "User created" });
-};
 
 export default {
   deleteUser,
   getAllUsers,
   getUser,
-  updateUser,
   createUser,
+  updateUser,
 };
